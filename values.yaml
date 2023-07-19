@@ -611,7 +611,7 @@ ports:
     # targetPort: 80
     ## -- The port protocol (TCP/UDP)
     protocol: TCP
-    # nodePort: 32443
+    nodePort: 32443
     ## -- Specify an application protocol. This may be used as a hint for a Layer 7 load balancer.
     # appProtocol: https
     #
@@ -622,8 +622,8 @@ ports:
     ## TCP & UDP (Http3). There is a workaround in this chart using dual Service.
     ## https://github.com/kubernetes/kubernetes/issues/47249#issuecomment-587960741
     http3:
-      enabled: false
-    # advertisedPort: 4443
+      enabled: true
+    advertisedPort: 443
     #
     ## -- Trust forwarded  headers information (X-Forwarded-*).
     #forwardedHeaders:
@@ -703,8 +703,8 @@ service:
   enabled: true
   ## -- Single service is using `MixedProtocolLBService` feature gate.
   ## -- When set to false, it will create two Service, one for TCP and one for UDP.
-  single: true
-  type: LoadBalancer
+  single: false
+  type: NodePort
   # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
   annotations: {}
   # -- Additional annotations for TCP service only
