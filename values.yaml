@@ -120,10 +120,10 @@ experimental:
     gateway:
       # -- Enable traefik regular kubernetes gateway
       enabled: true
-    # certificate:
-    #   group: "core"
-    #   kind: "Secret"
-    #   name: "mysecret"
+    certificate:
+      group: "core"
+      kind: "Secret"
+      name: "mysecret"
     # -- By default, Gateway would be created to the Namespace you are deploying Traefik to.
     # You may create that Gateway in another namespace, setting its name below:
     # namespace: default
@@ -194,8 +194,8 @@ providers:
     # ingressClass: traefik-internal
     # labelSelector: environment=production,method=traefik
     # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
-    namespaces: []
-      # - "default"
+    namespaces: 
+      - "default"
 
   kubernetesIngress:
     # -- Load Kubernetes IngressRoute provider
@@ -574,7 +574,7 @@ ports:
     ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicity set an entrypoint it will only use this entrypoint.
     # asDefault: true
     port: 8000
-    # hostPort: 8000
+    # hostPort: 80
     # containerPort: 8000
     expose: true
     exposedPort: 80
@@ -588,7 +588,7 @@ ports:
     # Port Redirections
     # Added in 2.2, you can make permanent redirects via entrypoints.
     # https://docs.traefik.io/routing/entrypoints/#redirection
-    # redirectTo: websecure
+    redirectTo: websecure
     #
     # Trust forwarded  headers information (X-Forwarded-*).
     # forwardedHeaders:
@@ -602,7 +602,7 @@ ports:
   websecure:
     ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicity set an entrypoint it will only use this entrypoint.
     # asDefault: true
-    port: 8443
+    port: 32443
     # hostPort: 8443
     # containerPort: 8443
     expose: true
@@ -642,11 +642,11 @@ ports:
       # this is the name of a TLSOption definition
       options: ""
       certResolver: ""
-      domains: []
-      # - main: example.com
-      #   sans:
-      #     - foo.example.com
-      #     - bar.example.com
+      # domains: ["traefik.localhost.com"]
+      # - main: traefik.localhost.com
+        # sans:
+        #   - foo.example.com
+        #   - bar.example.com
     #
     # -- One can apply Middlewares on an entrypoint
     # https://doc.traefik.io/traefik/middlewares/overview/
