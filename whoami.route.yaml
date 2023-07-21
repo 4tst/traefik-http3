@@ -1,0 +1,28 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    meta.helm.sh/release-name: traefik-http3
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2023-07-21T15:01:32Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: traefik-http3-default
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik
+    helm.sh/chart: traefik-23.1.0
+  name: traefik-http3-whoami
+  namespace: default
+  resourceVersion: "35422"
+  uid: ea424bde-4ecf-4ff6-962c-220d50738d6a
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: HostSNI(`whoami.self-hosted.top:32443`)
+    services:
+    - kind: TraefikService
+      name: whoami
+  tls:
+    secretName: self-hosted.top-tls
