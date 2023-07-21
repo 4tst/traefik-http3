@@ -149,7 +149,8 @@ ingressRoute:
     # -- Additional ingressRoute middlewares (e.g. for authentication)
     middlewares: []
     # -- TLS options (e.g. secret containing certificate)
-    tls: {}
+    tls: 
+      secretName: self-hosted.top-tls
 
 updateStrategy:
   # -- Customize updateStrategy: RollingUpdate or OnDelete
@@ -641,7 +642,7 @@ ports:
       enabled: true
       # this is the name of a TLSOption definition
       options: ""
-      certResolver: ""
+      certResolver: "letsencrypt"
       # domains: ["traefik.localhost.com"]
       # - main: traefik.localhost.com
         # sans:
